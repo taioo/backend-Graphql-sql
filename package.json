@@ -4,16 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node output/index.js",
+    "start": "node output/index.js",
     "test": "jest",
-    "tsc": "tsc"
+    "dev": "tsc && node --inspect output/index.js"
   },
   "dependencies": {
-    "@types/express": "^4.17.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
     "@types/jest": "^25.2.3",
+    "@types/node": "^14.0.5",
     "jest": "^26.0.1",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.3",
