@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node output/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.3",
+    "typescript-tslint-plugin": "^0.5.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taioo/node-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taioo/node-backend/issues"
+  },
+  "homepage": "https://github.com/taioo/node-backend#readme"
+}
