@@ -17,7 +17,8 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 const app = express();
 app.use(cors());
 app.use(express.json());
- 
+
+// curl -X GET http://localhost:3000
 app.get('/', (req, res) => {
   return res.send('Hello World!');
 });
