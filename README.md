@@ -1,4 +1,4 @@
 
 
-npx nodemon
+npx nodemon --watch
 npx jest --watch
