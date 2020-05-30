@@ -1,4 +1,4 @@
 
 
-npm run start:watch
-npm run test:watch
+npx nodemon
+npx jest --watch
