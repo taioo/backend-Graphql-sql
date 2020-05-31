@@ -1,3 +1,6 @@
 {
-    "eslint.validate": ["typescript", "typescript"]
+    "eslint.validate": [
+        "typescript"
+    ],
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
 }
