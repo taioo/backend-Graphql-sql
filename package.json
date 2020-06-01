@@ -45,7 +45,7 @@
     "watch": [
       "src"
     ],
-    "exec": "npm run dev",
+    "exec": "npm start",
     "ext": "ts"
   },
   "repository": {

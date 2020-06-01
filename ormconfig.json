@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "",
   "password": "",
-  "database": "apollo-server-boilerplate",
+  "database": "thaer",
   "synchronize": true,
   "logging": false,
   "entities": ["src/entity/**/*.ts"],
