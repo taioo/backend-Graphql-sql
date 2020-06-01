@@ -3,7 +3,4 @@
         "typescript"
     ],
     "javascript.implicitProjectConfig.experimentalDecorators": true,
-    "cSpell.words": [
-        "typeorm"
-    ],
 }
