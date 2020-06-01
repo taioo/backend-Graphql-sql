@@ -1,15 +1,10 @@
-import 'reflect-metadata'
 import { createConnection } from 'typeorm'
 import * as express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import { resolvers } from './resolvers'
-import * as fs from 'fs'
-import * as path from 'path'
-
-const UserDefs = reaGqlFile('/typeDefs/User.gql')
+import { schema } from './schema'
 
 const startServer = async () => {
-  const server = new ApolloServer({ typeDefs: [UserDefs], resolvers })
+  const server = new ApolloServer({ schema })
 
   await createConnection()
 
@@ -23,7 +18,3 @@ const startServer = async () => {
 }
 
 startServer()
-
-function reaGqlFile (pathFile:string) {
-  return fs.readFileSync(path.join(__dirname, pathFile), 'utf8').toString()
-}
