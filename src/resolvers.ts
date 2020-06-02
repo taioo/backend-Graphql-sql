@@ -18,12 +18,14 @@ export const resolvers = {
   },
   Mutation: {
     addUser: async (_: any, args: any) => {
-      const { firstName, lastName, age } = args
+      const { firstName, lastName, age, email } = args
       try {
         const user = User.create({
           firstName,
           lastName,
-          age
+          age,
+          email,
+          createDate: Date()
         })
 
         await user.save()
