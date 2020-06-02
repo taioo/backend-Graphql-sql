@@ -1,5 +1,6 @@
   type Query {
     getUser(id: Int!): User
+    getAllUsers:[User]
   }
   type Mutation {
     addUser(firstName: String!, lastName: String, age: Int!): Boolean!

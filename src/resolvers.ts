@@ -9,7 +9,12 @@ export const resolvers = {
       const { id } = args
 
       return await User.findOne({ where: { id: id } })
+    },
+
+    getAllUsers: async () => {
+      return await User.find()
     }
+
   },
   Mutation: {
     addUser: async (_: any, args: any) => {
