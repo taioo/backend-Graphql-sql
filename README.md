@@ -4,30 +4,43 @@ npx jest --watch
 ``` 
 mutation{
   addUser(
-firstName: "bob"
-lastName: "lastbob"
+firstName: "john"
+lastName: "doe"
 age: 100
+email:"bob@test.com"
 )
 }
 ```
 
 ``` 
+{
   getUser(id: 1){
     firstName
     lastName
     age
     id
+    email
+    createDate
   }
 }
+}
 ```
+
 ``` 
 mutation{
-  addUser(
-firstName: "bob"
-lastName: "marley"
-age: 100
-)
+  deleteUser(id : 1)
 }
+```
+
+``` 
+{
+  getAllUsers{
+    firstName
+    lastName
+    age
+    id
+    createDate
+    email
   }
 }
 ```

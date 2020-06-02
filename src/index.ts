@@ -6,7 +6,7 @@ import { resolvers } from './resolvers'
 import * as fs from 'fs'
 import * as path from 'path'
 
-const UserDefs = reaGqlFile('/typeDefs/User.gql')
+const UserDefs = readGqlFile('/typeDefs/User.gql')
 
 const startServer = async () => {
   const server = new ApolloServer({ typeDefs: [UserDefs], resolvers })
@@ -24,6 +24,6 @@ const startServer = async () => {
 
 startServer()
 
-function reaGqlFile (pathFile:string) {
+function readGqlFile (pathFile:string) {
   return fs.readFileSync(path.join(__dirname, pathFile), 'utf8').toString()
 }
