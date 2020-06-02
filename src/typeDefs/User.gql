@@ -1,3 +1,5 @@
+  scalar Date
+
   type Query {
     getUser(id: Int!): User
     getAllUsers:[User]
@@ -13,5 +15,5 @@
     lastName: String!
     age: Int!
     email: String!
-    createDate: String!
+    createDate: Date!
   }
