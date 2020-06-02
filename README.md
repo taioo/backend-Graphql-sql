@@ -1,8 +1,28 @@
-npx nodemon --watch
-
-npx jest --watch
-
 ``` 
+npm i
+``` 
+
+create .env file and paste
+```
+PORT = 3333
+```
+
+to run
+``` 
+npm start
+``` 
+run with nodemon
+```
+npm run start:watch
+```
+run tests with jest
+```
+npm test
+```
+
+
+examples:
+```
 mutation{
   addUser(
 firstName: "john"
