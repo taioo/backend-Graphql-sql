@@ -1,13 +1,18 @@
-``` 
-npm i
-``` 
-
-create .env file and paste
+## Set port & database
+- Create .env file and paste
 ```
 PORT = 3333
 ```
+- Start and create database in postgres
 
-to run
+Check ```.ormconfig``` file to configure database name
+
+</br>
+
+# Instal & run
+``` 
+npm i
+``` 
 ``` 
 npm start
 ``` 
@@ -19,9 +24,9 @@ run tests with jest
 ```
 npm test
 ```
+</br>
 
-
-examples:
+## examples:
 ```
 mutation{
   addUser(
