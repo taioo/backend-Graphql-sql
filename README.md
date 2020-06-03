@@ -5,7 +5,7 @@ PORT = 3333
 ```
 - Start and create database in postgres
 
-Check ```.ormconfig``` file to configure database name
+Check ```ormconfig.json``` file to configure database name
 
 </br>
 
