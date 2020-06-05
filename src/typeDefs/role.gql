@@ -1,0 +1,16 @@
+
+extend type Query {
+    getRole(id: Int!): Role
+    getAllRoles:[Role]
+  }
+extend  type Mutation {
+    createRole(name: String!): Boolean!
+    deleteRole(id: Int!) : Boolean!
+    addRoleToUser(userId: Int, roleId: Int) : Boolean!
+  }
+    type Role {
+    id: Int!
+    name: String!
+    addDate: Date!
+    user: User
+  }

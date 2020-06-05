@@ -8,11 +8,13 @@ import { roleResolvers } from './resolvers/role.resolvers'
 import * as fs from 'fs'
 import * as path from 'path'
 
-const userDefs = readGqlFile('/typeDefs.gql')
+const typeDefs = readGqlFile('typeDefs/user.gql')
+const userDefs = readGqlFile('typeDefs/typeDefs.gql')
+const roleDefs = readGqlFile('typeDefs/role.gql')
 
 const startServer = async () => {
   const server = new ApolloServer({
-    typeDefs: [userDefs],
+    typeDefs: [typeDefs, userDefs, roleDefs],
     resolvers: [resolvers, userResolvers, roleResolvers]
   })
 
