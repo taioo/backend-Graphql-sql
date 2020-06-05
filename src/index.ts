@@ -15,7 +15,8 @@ const roleDefs = readGqlFile('typeDefs/role.gql')
 const startServer = async () => {
   const server = new ApolloServer({
     typeDefs: [typeDefs, userDefs, roleDefs],
-    resolvers: [resolvers, userResolvers, roleResolvers]
+    resolvers: [resolvers, userResolvers, roleResolvers],
+    tracing: true
   })
 
   await createConnection()
