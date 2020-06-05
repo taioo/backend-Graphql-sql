@@ -2,11 +2,16 @@
 
   type Query {
     getUser(id: Int!): User
+    getRole(id: Int!): Role
     getAllUsers:[User]
+    getAllRoles:[Role]
   }
   type Mutation {
-    addUser(firstName: String!, lastName: String, age: Int!, email: String): Boolean!
-    deleteUser(id : Int!) : Boolean!
+    createUser(firstName: String!, lastName: String, age: Int!, email: String): Boolean!
+    createRole(name: String!): Boolean!
+    deleteUser(id: Int!) : Boolean!
+    deleteRole(id: Int!) : Boolean!
+    addRoleToUser(userId: Int, roleId: Int) : Boolean!
   }
 
   type User {
@@ -16,4 +21,12 @@
     age: Int!
     email: String!
     createDate: Date!
+    role: Role
+  }
+
+    type Role {
+    id: Int!
+    name: String!
+    addDate: Date!
+    user: User
   }

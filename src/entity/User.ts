@@ -1,7 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, JoinTable } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn } from 'typeorm'
 import { IsEmail, IsDate } from 'class-validator'
-
-import { Item } from './Items'
+import { Role } from './Role'
 
 @Entity()
 export class User extends BaseEntity {
@@ -25,7 +24,7 @@ export class User extends BaseEntity {
   @IsDate()
   createDate: Date;
 
-  @ManyToMany(() => Item, Item => Item.Users)
-  @JoinTable()
-  Items: Item[]
+  @OneToOne(() => Role)
+  @JoinColumn()
+  role: Role
 }

@@ -29,12 +29,16 @@ npm test
 ## examples:
 ```
 mutation{
-  addUser(
+  createUser(
 firstName: "john"
 lastName: "doe"
 age: 100
-email:"bob@test.com"
-)
+email:"john@test.com"
+  ),
+  createRole(
+    name:"CEO"
+  )
+  
 }
 ```
 
@@ -47,14 +51,29 @@ email:"bob@test.com"
     id
     email
     createDate
+    role{
+      id
+      name
+    }
   }
-}
+  
+    getRole(id: 1){
+    name
+    addDate
+    id
+    user{
+      id
+      firstName
+      createDate
+    }
+  }
 }
 ```
 
 ``` 
 mutation{
-  deleteUser(id : 1)
+  deleteUser(id : 3)
+  deleteRole(id : 3)
 }
 ```
 
@@ -67,6 +86,25 @@ mutation{
     id
     createDate
     email
+    role{
+      id
+      name
+    }
   }
+  
+  getAllRoles{
+    name
+    id
+    addDate
+    user{
+      id
+    }
+  }
+  
+}
+```
+```
+mutation{
+  addRoleToUser(userId: 1,roleId: 1)
 }
 ```
