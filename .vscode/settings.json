@@ -4,6 +4,7 @@
     ],
     "javascript.implicitProjectConfig.experimentalDecorators": true,
     "cSpell.words": [
+        "ormconfig",
         "typeorm"
     ],
 }
