@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { makeExecutableSchema } from 'graphql-tools'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -41,14 +42,6 @@ export const graphqlTestCall = async (
     variables
   )
 }
-
-// describe('Example', () => {
-//   test('hello output', () => {
-//     expect(
-//       'hello'
-//     ).toEqual('hello')
-//   })
-// })
 
 function readFile (pathFile: string) {
   return fs.readFileSync(path.join(__dirname, pathFile), 'utf8').toString()

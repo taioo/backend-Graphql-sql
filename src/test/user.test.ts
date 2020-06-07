@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { graphqlTestCall, createTestConn } from '.'
 import { Connection } from 'typeorm'
 import { User } from '../entity/User'
-
-/** This is a very bad way to test */
 
 const CreateUserMutation = `
   mutation CreateUser($firstName: String!, $lastName: String!, $age: Int!, $email: String!) {
@@ -37,12 +36,12 @@ afterAll(async () => {
 })
 
 describe('User resolvers', () => {
-  test('is testUser in DB', async () => {
+  test('set testUser in DB', async () => {
     const dbUser = await User.findOne({ where: { email: testUser.email } })
     expect(dbUser).toBeDefined()
   })
 
-  it('find user', async () => {
+  it('createUser', async () => {
     registerResponse = await graphqlTestCall(CreateUserMutation, {
       firstName: testUser.firstName,
       lastName: testUser.lastName,
@@ -52,10 +51,10 @@ describe('User resolvers', () => {
     expect(registerResponse).toEqual({ data: { createUser: true } })
   })
 
-  it('is user created', async () => {
+  it('getUser', async () => {
     registerResponse = await graphqlTestCall(GetUser, {
       id: testUser.id
     })
-    expect(registerResponse.data!.getUser.age).toEqual(100)
+    expect(registerResponse.data!.getUser.id).toEqual(1)
   })
 })
