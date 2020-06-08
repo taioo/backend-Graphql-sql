@@ -38,7 +38,6 @@ export const userResolvers = {
       const { id } = args
       try {
         await User.delete(id)
-        console.log(User)
         return true
       } catch (error) {
         return false

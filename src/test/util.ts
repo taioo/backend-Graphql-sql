@@ -11,7 +11,6 @@ import { userResolvers } from '../resolvers/user.resolvers'
 import { roleResolvers } from '../resolvers/role.resolvers'
 import { graphql } from 'graphql'
 import { createConnection } from 'typeorm'
-
 const typeDefs = readFile('../typeDefs/user.gql')
 const userDefs = readFile('../typeDefs/typeDefs.gql')
 const roleDefs = readFile('../typeDefs/role.gql')

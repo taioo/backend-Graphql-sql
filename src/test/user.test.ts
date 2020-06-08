@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { graphqlTestCall, createTestConn } from '.'
+import { graphqlTestCall, createTestConn } from './util'
 import { Connection } from 'typeorm'
 import { User } from '../entity/User'
 
@@ -22,39 +22,65 @@ query GetUser ($id : Int!) {
   }
 `
 
-let testUser: { id: number, firstName: string; lastName: string; age: number; email: string }
-let registerResponse
+const DeleteUser = `
+mutation DeleteUser ($id : Int!) {
+  deleteUser(id: $id)
+  }
+`
+
 let conn: Connection
 
 beforeAll(async () => {
   conn = await createTestConn()
-  testUser = { id: 1, firstName: 'firstName', lastName: 'lastName', age: 100, email: 'email@mail.com' }
 })
 
 afterAll(async () => {
   await conn.close()
 })
 
-describe('User resolvers', () => {
-  test('set testUser in DB', async () => {
-    const dbUser = await User.findOne({ where: { email: testUser.email } })
-    expect(dbUser).toBeDefined()
-  })
+describe('User', () => {
+  const testUser = { firstName: 'firstName', lastName: 'lastName', age: 100, email: 'email@testmail.com' }
+  let dbUser: { id: number, firstName: string, lastName: string, age: number, email: string } | undefined
 
-  it('createUser', async () => {
-    registerResponse = await graphqlTestCall(CreateUserMutation, {
+  it('create testUser and find testUser in db', async () => {
+    const registerResponse = await graphqlTestCall(CreateUserMutation, {
       firstName: testUser.firstName,
       lastName: testUser.lastName,
       age: testUser.age,
       email: testUser.email
     })
     expect(registerResponse).toEqual({ data: { createUser: true } })
+    dbUser = await User.findOne({
+      where: {
+        firstName: testUser.firstName,
+        lastName: testUser.lastName,
+        age: testUser.age,
+        email: testUser.email
+      }
+    })
+    expect(dbUser).toBeDefined()
   })
 
-  it('getUser', async () => {
-    registerResponse = await graphqlTestCall(GetUser, {
-      id: testUser.id
+  it('getUser resolver', async () => {
+    const registerResponse = await graphqlTestCall(GetUser, {
+      id: dbUser!.id
     })
-    expect(registerResponse.data!.getUser.id).toEqual(1)
+    expect(registerResponse.data!.getUser.id).toEqual(dbUser!.id)
+  })
+
+  it('delete testUser and check in db', async () => {
+    const registerResponse = await graphqlTestCall(DeleteUser, {
+      id: dbUser!.id
+    })
+    dbUser = await User.findOne({
+      where: {
+        firstName: testUser.firstName,
+        lastName: testUser.lastName,
+        age: testUser.age,
+        email: testUser.email
+      }
+    })
+    expect(registerResponse).toEqual({ data: { deleteUser: true } })
+    expect(dbUser).toBeUndefined()
   })
 })
