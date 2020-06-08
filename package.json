@@ -37,7 +37,7 @@
     "start:watch": "nodemon",
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "build": "tsc"
+    "build": "tsc && cp -a ./src/typeDefs output/typeDefs && node output/index.js"
   },
   "nodemonConfig": {
     "ignore": [

@@ -24,6 +24,22 @@ run tests with jest
 ```
 npm test
 ```
+## only if you want Build and run
+
+change ```ormconfig.json``` to js files paths
+```
+  "entities": ["output/entity/**/*.js"],
+  "migrations": ["output/migration/**/*.js"],
+  "subscribers": ["output/subscriber/**/*.js"],
+  "cli": {
+    "entitiesDir": "output/entity",
+    "migrationsDir": "output/migration",
+    "subscribersDir": "output/subscriber"
+```
+build and run
+```
+npm run build
+```
 </br>
 
 ## examples:

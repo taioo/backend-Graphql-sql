@@ -13,7 +13,6 @@ export const roleResolvers = {
   Query: {
 
     getRole: async (_: any, args: any) => {
-      console.log(await Role.findOne(args.id, { relations: ['user'] }))
       return await Role.findOne(args.id, { relations: ['user'] })
     },
 
@@ -46,8 +45,6 @@ export const roleResolvers = {
 
         user!.role = role!
         role!.user = user!
-
-        console.log(role!)
 
         await user!.save()
         await role!.save()

@@ -19,7 +19,6 @@
     "sourceMap": true,
     "outDir": "./output",
     "moduleResolution": "node",
-
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -29,7 +28,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
