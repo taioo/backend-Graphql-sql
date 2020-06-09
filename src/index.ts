@@ -26,7 +26,7 @@ const startServer = async () => {
   server.applyMiddleware({ app })
 
   app.listen({ port: process.env.PORT }, () =>
-    console.log(`🚀 Server ready at http://localhost:${process.env.PORT}${server.graphqlPath}`)
+    console.log(`🚀 running in ${process.env.NODE_ENV} mode \n Server ready at http://localhost:${process.env.PORT}${server.graphqlPath}`)
   )
 }
 

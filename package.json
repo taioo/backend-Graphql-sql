@@ -33,11 +33,12 @@
     "typeorm": "^0.2.19"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "export NODE_ENV=dev-TypeScript&& ts-node src/index.ts",
+    "build": "export NODE_ENV=dev-JavaScript&& tsc && cp -a ./src/typeDefs output/typeDefs && node output/index.js",
+    "production": "export NODE_ENV=production&& tsc && cp -a ./src/typeDefs output/typeDefs && node output/index.js",
     "start:watch": "nodemon",
-    "test": "jest",
-    "test:watch": "npm test -- --watch",
-    "build": "tsc && cp -a ./src/typeDefs output/typeDefs && node output/index.js"
+    "test": "export NODE_ENV=test&& jest",
+    "test:watch": "npm test -- --watch"
   },
   "nodemonConfig": {
     "ignore": [
