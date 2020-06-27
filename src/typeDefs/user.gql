@@ -3,7 +3,7 @@
     getAllUsers:[User]
   }
  extend type Mutation {
-    createUser(firstName: String!, lastName: String, age: Int!, email: String): Boolean!
+    createUser(firstName: String!, lastName: String, age: Int!, email: String, password: String): Boolean!
     deleteUser(id: Int!) : Boolean!
   }
 
@@ -13,6 +13,7 @@
     lastName: String!
     age: Int!
     email: String!
+    password: String!
     createDate: Date!
     role: Role
   }

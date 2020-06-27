@@ -2,3 +2,9 @@
 
   type Mutation
   type Query
+
+
+  type Error {
+  path: String!
+  message: String!
+}

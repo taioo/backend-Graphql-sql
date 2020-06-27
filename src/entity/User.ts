@@ -24,6 +24,9 @@ export class User extends BaseEntity {
   @IsDate()
   createDate: Date;
 
+  @Column()
+  password: string;
+
   @OneToOne(() => Role)
   @JoinColumn()
   role: Role
