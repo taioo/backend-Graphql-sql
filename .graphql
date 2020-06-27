@@ -1,6 +1,6 @@
 {
 	//graphql globs
 	"schemas": [
-		"src/graphql/**/*.gql"
+		"src/**/*.gql"
 	]
 }
