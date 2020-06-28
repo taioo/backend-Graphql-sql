@@ -18,7 +18,12 @@ const startServer = async () => {
   const server = new ApolloServer({
     typeDefs: [typeDefs, userDefs, roleDefs, loginDefs],
     resolvers: [resolvers, userResolvers, roleResolvers, loginResolvers],
-    tracing: true
+    tracing: true,
+    playground: {
+      settings: {
+        'request.credentials': 'include'
+      }
+    }
   })
 
   await createConnection()
@@ -26,9 +31,9 @@ const startServer = async () => {
   const app = express()
 
   server.applyMiddleware({ app })
-
-  app.listen({ port: process.env.PORT }, () =>
-    console.log(`🚀 running in ${process.env.NODE_ENV} mode \n Server ready at http://localhost:${process.env.PORT}${server.graphqlPath}`)
+  const port = process.env.PORT || 3333
+  app.listen({ port: port }, () =>
+    console.log(`🚀 running in ${process.env.NODE_ENV} mode \n Server ready at http://localhost:${port}${server.graphqlPath}`)
   )
 }
 
