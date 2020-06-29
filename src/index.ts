@@ -22,12 +22,9 @@ app.post('/get-token', async (req, res) => {
   const { email, password } = req.query
   const user = await User.findOne({ where: { email: email } })
   if (user) {
-    // we use bcrypt to compare the hash in the database (mock.js) to the password the user provides
     const match = password === user.password
     if (match) {
-      // we create the JWT for the user with our secret
-      // inside the token we encrypt some user data
-      // then we send the token to the user
+      // create the token for the user with a secret code and send
       const token = jwt.sign({ email: user.email, id: user.id }, SECRET_KEY)
       res.send({
         success: true,
