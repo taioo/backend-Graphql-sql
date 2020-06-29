@@ -7,7 +7,7 @@ import { Kind } from 'graphql/language'
 import * as Moment from 'moment'
 
 // Provide resolver functions for your schema fields
-export const resolvers = {
+export const mainResolvers = {
 
   Date: new GraphQLScalarType({
     name: 'Date',

@@ -2,22 +2,22 @@ import 'reflect-metadata'
 import { createConnection } from 'typeorm'
 import * as express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import { resolvers } from './resolvers/resolvers'
+import { mainResolvers } from './resolvers/mainResolvers'
 import { userResolvers } from './resolvers/user.resolvers'
 import { roleResolvers } from './resolvers/role.resolvers'
 import { loginResolvers } from './resolvers/login.resolvers'
 import * as fs from 'fs'
 import * as path from 'path'
 
-const typeDefs = readGqlFile('typeDefs/user.gql')
+const mainDefs = readGqlFile('typeDefs/main.gql')
 const loginDefs = readGqlFile('typeDefs/login.gql')
-const userDefs = readGqlFile('typeDefs/typeDefs.gql')
+const userDefs = readGqlFile('typeDefs/user.gql')
 const roleDefs = readGqlFile('typeDefs/role.gql')
 
 const startServer = async () => {
   const server = new ApolloServer({
-    typeDefs: [typeDefs, userDefs, roleDefs, loginDefs],
-    resolvers: [resolvers, userResolvers, roleResolvers, loginResolvers],
+    typeDefs: [mainDefs, userDefs, roleDefs, loginDefs],
+    resolvers: [mainResolvers, userResolvers, roleResolvers, loginResolvers],
     tracing: true,
     playground: {
       settings: {
