@@ -3,7 +3,7 @@
 ```
 PORT = 3333
 ```
-- Start and create database in postgres
+- create database in postgres
 
 Check ```ormconfig.js``` file to configure database name
 
@@ -33,6 +33,18 @@ npm run production
 ```
 </br>
 
+create the follow user in database
+```
+firstName: "john"
+lastName: "doe"
+age: 100
+email:"john@test.com"
+password:"password"
+```
+to get the token for the user john 
+POST **localhost:3333/get-token?email=john@test.com&password=password**
+
+
 ## examples:
 ```
 mutation{
@@ -41,12 +53,16 @@ firstName: "john"
 lastName: "doe"
 age: 100
 email:"john@test.com"
+password:"password"
   ),
   createRole(
     name:"CEO"
   )
-  
 }
+```
+On the GraphQL endpoint you have a tab called HTTP HEADERS. This is john doe token
+```
+{ "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AdGVzdC5jb20iLCJpZCI6MiwiaWF0IjoxNTkzNDUyNTc1fQ.mogtAsf4J6_9GMwTbQxICzb4Ex4PoJEYBsGUcjiWr9A"}
 ```
 
 ``` 
@@ -56,7 +72,8 @@ email:"john@test.com"
     lastName
     age
     id
-    email
+    email,
+    password,
     createDate
     role{
       id
@@ -93,6 +110,7 @@ mutation{
     id
     createDate
     email
+    password
     role{
       id
       name
