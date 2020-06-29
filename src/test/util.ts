@@ -3,19 +3,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { makeExecutableSchema } from 'graphql-tools'
-import * as fs from 'fs'
-import * as path from 'path'
 
-import { resolvers } from '../resolvers/resolvers'
+import { mainResolvers } from '../resolvers/mainResolvers'
 import { userResolvers } from '../resolvers/user.resolvers'
 import { roleResolvers } from '../resolvers/role.resolvers'
 import { graphql } from 'graphql'
 import { createConnection } from 'typeorm'
-const typeDefs = readFile('../typeDefs/user.gql')
-const userDefs = readFile('../typeDefs/typeDefs.gql')
+import fs = require('fs')
+import path = require('path')
+const userDefs = readFile('../typeDefs/user.gql')
+const mainDefs = readFile('../typeDefs/main.gql')
 const roleDefs = readFile('../typeDefs/role.gql')
 
-const schema = makeExecutableSchema({ typeDefs: [typeDefs, userDefs, roleDefs], resolvers: [resolvers, userResolvers, roleResolvers] })
+const schema = makeExecutableSchema({ typeDefs: [mainDefs, userDefs, roleDefs], resolvers: [mainResolvers, userResolvers, roleResolvers] })
 
 export const createTestConn = async () => createConnection()
 

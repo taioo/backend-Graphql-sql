@@ -1,17 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import 'reflect-metadata'
 import { createConnection } from 'typeorm'
-import * as express from 'express'
 import { ApolloServer, AuthenticationError } from 'apollo-server-express'
 import { mainResolvers } from './resolvers/mainResolvers'
 import { userResolvers } from './resolvers/user.resolvers'
 import { roleResolvers } from './resolvers/role.resolvers'
 import { User } from './entity/User'
+import { IncomingMessage } from 'http'
 
-import * as fs from 'fs'
-import * as path from 'path'
-import * as jwt from 'jsonwebtoken'
+import fs = require('fs')
+import path = require('path')
+import jwt = require('jsonwebtoken')
+import express = require('express')
+
 const SECRET_KEY = process.env.SECRET_KEY || 'my8secret8key'
 const mainDefs = readGqlFile('typeDefs/main.gql')
 const userDefs = readGqlFile('typeDefs/user.gql')
@@ -24,28 +24,28 @@ app.post('/get-token', async (req, res) => {
   if (user) {
     const match = password === user.password
     if (match) {
-      // create the token for the user with a secret code and send
+      // create the token for the user with a secret_key and send
       const token = jwt.sign({ email: user.email, id: user.id }, SECRET_KEY)
       res.send({
         success: true,
         token: token
       })
     } else {
-      // return error to user to let them know the password is incorrect
+      // return message password is incorrect
       res.status(401).send({
         success: false,
         message: 'Incorrect credentials'
       })
     }
   } else {
-    // return error to user to let them know the account there are using does not exists
+    // return message user does not exists
     res.status(404).send({
       success: false,
       message: `Could not find account: ${email}`
     })
   }
 })
-const context = ({ req } :any) => {
+const context = ({ req }: Req) => {
   // get the user token from the headers
   const token = req.headers.authorization || ''
   try {
@@ -79,7 +79,9 @@ const startServer = async () => {
 
 startServer()
 
-function readGqlFile (pathFile:string) {
+type Req = { req: IncomingMessage }
+
+function readGqlFile (pathFile: string) {
   const query = fs.readFileSync(path.join(__dirname, pathFile), 'utf8').toString()
   return query
 }

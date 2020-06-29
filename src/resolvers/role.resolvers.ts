@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import { User } from '../entity/User'
@@ -9,7 +8,7 @@ import { Role } from '../entity/Role'
 export const roleResolvers = {
   Query: {
 
-    getRole: async (_: any, args: any) => {
+    getRole: async (_: IRole, args: IRole) => {
       return await Role.findOne(args.id, { relations: ['user'] })
     },
 
@@ -19,7 +18,7 @@ export const roleResolvers = {
 
   },
   Mutation: {
-    createRole: async (_: any, args: any) => {
+    createRole: async (_: IRole, args: IRole) => {
       const { name } = args
       try {
         const role = Role.create({
@@ -34,12 +33,16 @@ export const roleResolvers = {
       }
     },
 
-    addRoleToUser: async (_: any, args: any) => {
+    addRoleToUser: async (_: IAddRoleToUser, args: IAddRoleToUser) => {
+      console.log(args + ' ' + _)
       const { userId, roleId } = args
+      console.log(args)
       try {
         const user = await User.findOne(userId, { relations: ['role'] })
         const role = await Role.findOne(roleId, { relations: ['user'] })
-
+        if (!role || !user) {
+          return false
+        }
         user!.role = role!
         role!.user = user!
 
@@ -52,7 +55,7 @@ export const roleResolvers = {
         return false
       }
     },
-    deleteRole: async (_: any, args: any) => {
+    deleteRole: async (_: IRole, args: IRole) => {
       const { id } = args
       try {
         await Role.delete(id)
@@ -62,4 +65,18 @@ export const roleResolvers = {
       }
     }
   }
+}
+
+interface IRole {
+  __typename: 'Role';
+  id: string;
+  name: string;
+  addDate: Date;
+  user: User
+}
+
+interface IAddRoleToUser {
+  __typename: 'AddRoleToUser';
+  userId: number;
+  roleId: number;
 }

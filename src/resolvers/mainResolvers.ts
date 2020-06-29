@@ -4,7 +4,7 @@
 
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
-import * as Moment from 'moment'
+import Moment = require('moment')
 
 // Provide resolver functions for your schema fields
 export const mainResolvers = {

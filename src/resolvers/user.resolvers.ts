@@ -1,5 +1,4 @@
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import { User } from '../entity/User'
@@ -7,7 +6,7 @@ import { User } from '../entity/User'
 // Provide resolver functions for your schema fields
 export const userResolvers = {
   Query: {
-    getUser: async (_: any, args: any) => {
+    getUser: async (_: IUser, args: IUser) => {
       return await User.findOne(args.id, { relations: ['role'] })
     },
 
@@ -17,7 +16,7 @@ export const userResolvers = {
 
   },
   Mutation: {
-    createUser: async (_: any, args: any) => {
+    createUser: async (_: IUser, args: IUser) => {
       const { firstName, lastName, age, email, password } = args
       try {
         const user = User.create({
@@ -35,7 +34,7 @@ export const userResolvers = {
         return false
       }
     },
-    deleteUser: async (_: any, args: any) => {
+    deleteUser: async (_: IUser, args: IUser) => {
       const { id } = args
       try {
         await User.delete(id)
@@ -45,4 +44,15 @@ export const userResolvers = {
       }
     }
   }
+}
+
+interface IUser {
+  __typename: 'User';
+  id: number;
+  firstName: string;
+  lastName: string
+  age: number;
+  email: string;
+  password: string;
+  createDate:Date;
 }
