@@ -1,8 +1,5 @@
 ## Set port & database
-- Create .env file and paste
-```
-PORT = 3333
-```
+
 - create database in postgres
 
 Check ```ormconfig.js``` file to configure database name
