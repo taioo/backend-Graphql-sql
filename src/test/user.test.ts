@@ -57,8 +57,7 @@ describe('User', () => {
         firstName: testUser.firstName,
         lastName: testUser.lastName,
         age: testUser.age,
-        email: testUser.email,
-        password: testUser.password
+        email: testUser.email
       }
     })
     expect(dbUser).toBeDefined()
