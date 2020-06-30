@@ -30,19 +30,9 @@ npm run production
 ```
 </br>
 
-create the follow user in database
-```
-firstName: "john"
-lastName: "doe"
-age: 100
-email:"john@test.com"
-password:"password"
-```
-to get the token for the user john 
-POST **localhost:3333/get-token?email=john@test.com&password=password**
 
 
-## examples:
+## APi examples:
 ```
 mutation{
   createUser(
@@ -57,11 +47,27 @@ password:"password"
   )
 }
 ```
-On the GraphQL endpoint you have a tab called HTTP HEADERS. This is john doe token
 ```
-{ "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AdGVzdC5jb20iLCJpZCI6MiwiaWF0IjoxNTkzNDUyNTc1fQ.mogtAsf4J6_9GMwTbQxICzb4Ex4PoJEYBsGUcjiWr9A"}
+mutation{
+  addRoleToUser(userId: 1,roleId: 1)
+}
 ```
-
+```
+mutation{
+login(email: "john@test.com", password: "password" ){
+  id
+  email
+  firstName
+}
+}
+```
+```
+{
+  getMyRole{
+    name
+  }
+}
+```
 ``` 
 {
   getUser(id: 1){
@@ -123,10 +129,5 @@ mutation{
     }
   }
   
-}
-```
-```
-mutation{
-  addRoleToUser(userId: 1,roleId: 1)
 }
 ```

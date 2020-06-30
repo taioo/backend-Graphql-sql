@@ -1,6 +1,7 @@
 
 extend type Query {
     getRole(id: Int!): Role
+    getMyRole: Role
     getAllRoles:[Role]
   }
 extend  type Mutation {

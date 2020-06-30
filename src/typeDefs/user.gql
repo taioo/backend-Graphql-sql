@@ -5,6 +5,7 @@
  extend type Mutation {
     createUser(firstName: String!, lastName: String, age: Int!, email: String, password: String): Boolean!
     deleteUser(id: Int!) : Boolean!
+    login(email: String!, password: String!): User
   }
 
   type User {

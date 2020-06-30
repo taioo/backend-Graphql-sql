@@ -11,6 +11,13 @@ export const roleResolvers = {
     getRole: async (_: IRole, args: IRole) => {
       return await Role.findOne(args.id, { relations: ['user'] })
     },
+    getMyRole: async (_: IRole, _args: IRole, { req }:any) => {
+      if (!req.userId) {
+        return null
+      }
+
+      return await Role.findOne(req.id, { relations: ['user'] })
+    },
 
     getAllRoles: async () => {
       return await Role.find({ relations: ['user'] })
@@ -33,10 +40,8 @@ export const roleResolvers = {
       }
     },
 
-    addRoleToUser: async (_: IAddRoleToUser, args: IAddRoleToUser) => {
-      console.log(args + ' ' + _)
+    addRoleToUser: async (_: any, args: any) => {
       const { userId, roleId } = args
-      console.log(args)
       try {
         const user = await User.findOne(userId, { relations: ['role'] })
         const role = await Role.findOne(roleId, { relations: ['user'] })
@@ -75,8 +80,8 @@ interface IRole {
   user: User
 }
 
-interface IAddRoleToUser {
-  __typename: 'AddRoleToUser';
-  userId: number;
-  roleId: number;
-}
+// interface IAddRoleToUser {
+//   __typename: 'AddRoleToUser';
+//   userId: number;
+//   roleId: number;
+// }
