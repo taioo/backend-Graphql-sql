@@ -1,6 +1,7 @@
  extend type Query {
     getUser(id: Int!): User
     getAllUsers:[User]
+    getMe: User
   }
  extend type Mutation {
     createUser(firstName: String!, lastName: String, age: Int!, email: String, password: String): Boolean!

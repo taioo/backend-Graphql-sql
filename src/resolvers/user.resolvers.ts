@@ -14,6 +14,14 @@ export const userResolvers = {
 
     getAllUsers: async () => {
       return await User.find({ relations: ['role'] })
+    },
+
+    getMe: async (_: IUser, _args: IUser, { req }:any) => {
+      if (!req.userId) {
+        return null
+      }
+
+      return await User.findOne(req.id, { relations: ['role'] })
     }
 
   },

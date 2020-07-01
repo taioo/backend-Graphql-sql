@@ -63,8 +63,14 @@ login(email: "john@test.com", password: "password" ){
 ```
 ```
 {
-  getMyRole{
-    name
+  getMe{
+    firstName
+    lastName
+    createDate
+    password
+    role{
+      name
+    }
   }
 }
 ```

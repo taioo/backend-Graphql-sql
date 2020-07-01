@@ -11,13 +11,6 @@ export const roleResolvers = {
     getRole: async (_: IRole, args: IRole) => {
       return await Role.findOne(args.id, { relations: ['user'] })
     },
-    getMyRole: async (_: IRole, _args: IRole, { req }:any) => {
-      if (!req.userId) {
-        return null
-      }
-
-      return await Role.findOne(req.id, { relations: ['user'] })
-    },
 
     getAllRoles: async () => {
       return await Role.find({ relations: ['user'] })
