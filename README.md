@@ -38,7 +38,7 @@ mutation{
   createUser(
 firstName: "john"
 lastName: "doe"
-age: 100
+birthday: "1900-01-01"
 email:"john@test.com"
 password:"password"
   ),
@@ -79,7 +79,7 @@ login(email: "john@test.com", password: "password" ){
   getUser(id: 1){
     firstName
     lastName
-    age
+    birthday
     id
     email,
     password,
@@ -115,7 +115,7 @@ mutation{
   getAllUsers{
     firstName
     lastName
-    age
+    birthday
     id
     createDate
     email

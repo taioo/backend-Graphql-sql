@@ -8,7 +8,7 @@ const SECRET_KEY = process.env.SECRET_KEY || 'my8secret8key'
 // Provide resolver functions for your schema fields
 export const userResolvers = {
   Query: {
-    getUser: async (_: IUser, args: IUser) => {
+    getUser: async (_: User, args: User) => {
       return await User.findOne(args.id, { relations: ['role'] })
     },
 
@@ -16,7 +16,7 @@ export const userResolvers = {
       return await User.find({ relations: ['role'] })
     },
 
-    getMe: async (_: IUser, _args: IUser, { req }:any) => {
+    getMe: async (_: User, _args: User, { req }:any) => {
       if (!req.userId) {
         return null
       }
@@ -26,14 +26,14 @@ export const userResolvers = {
 
   },
   Mutation: {
-    createUser: async (_: IUser, args: IUser) => {
-      const { firstName, lastName, age, email, password } = args
+    createUser: async (_: User, args: User) => {
+      const { firstName, lastName, birthday, email, password } = args
       const hashedPassword = await bcrypt.hash(password, 10)
       try {
         const user = User.create({
           firstName,
           lastName,
-          age,
+          birthday,
           email,
           password: hashedPassword,
           createDate: Date()
@@ -45,7 +45,7 @@ export const userResolvers = {
         return false
       }
     },
-    deleteUser: async (_: IUser, args: IUser) => {
+    deleteUser: async (_: User, args: User) => {
       const { id } = args
       try {
         await User.delete(id)
@@ -78,15 +78,4 @@ export const userResolvers = {
       return user
     }
   }
-}
-
-interface IUser {
-  __typename: 'User';
-  id: number;
-  firstName: string;
-  lastName: string
-  age: number;
-  email: string;
-  password: string;
-  createDate:Date;
 }

@@ -14,7 +14,7 @@ export class User extends BaseEntity {
   lastName: string;
 
   @Column()
-  age: number;
+  birthday: Date;
 
   @Column({ unique: true })
   @IsEmail()

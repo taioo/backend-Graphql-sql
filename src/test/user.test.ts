@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { graphqlTestCall, createTestConn } from './util'
 import { Connection } from 'typeorm'
 import { User } from '../entity/User'
 
 const CreateUserMutation = `
-  mutation CreateUser($firstName: String!, $lastName: String!, $age: Int!, $email: String!, $password: String) {
-    createUser(firstName: $firstName, lastName: $lastName, age: $age, email: $email, password: $password)
+  mutation CreateUser($firstName: String!, $lastName: String!, $birthday: Date!, $email: String!, $password: String) {
+    createUser(firstName: $firstName, lastName: $lastName, birthday: $birthday, email: $email, password: $password)
   }
 `
 
@@ -15,7 +16,7 @@ query GetUser ($id : Int!) {
         id
         firstName
         lastName
-        age
+        birthday
         email
         password
         createDate
@@ -40,14 +41,14 @@ afterAll(async () => {
 })
 
 describe('User', () => {
-  const testUser = { firstName: 'firstName', lastName: 'lastName', age: 100, email: 'email@testmail.com', password: 'password' }
-  let dbUser: { id: number, firstName: string, lastName: string, age: number, email: string, password: string} | undefined
+  const testUser = { firstName: 'firstName', lastName: 'lastName', birthday: new Date(), email: 'email@testmail.com', password: 'password' }
+  let dbUser: User | undefined
 
   it('create testUser and find testUser in db', async () => {
     const registerResponse = await graphqlTestCall(CreateUserMutation, {
       firstName: testUser.firstName,
       lastName: testUser.lastName,
-      age: testUser.age,
+      birthday: testUser.birthday,
       email: testUser.email,
       password: testUser.password
     })
@@ -56,7 +57,6 @@ describe('User', () => {
       where: {
         firstName: testUser.firstName,
         lastName: testUser.lastName,
-        age: testUser.age,
         email: testUser.email
       }
     })
@@ -78,7 +78,7 @@ describe('User', () => {
       where: {
         firstName: testUser.firstName,
         lastName: testUser.lastName,
-        age: testUser.age,
+        birthday: testUser.birthday,
         email: testUser.email
       }
     })

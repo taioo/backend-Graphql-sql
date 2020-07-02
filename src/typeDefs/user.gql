@@ -4,7 +4,7 @@
     getMe: User
   }
  extend type Mutation {
-    createUser(firstName: String!, lastName: String, age: Int!, email: String, password: String): Boolean!
+    createUser(firstName: String!, lastName: String, birthday: Date!, email: String, password: String): Boolean!
     deleteUser(id: Int!) : Boolean!
     login(email: String!, password: String!): User
   }
@@ -13,7 +13,7 @@
     id: Int!
     firstName: String!
     lastName: String!
-    age: Int!
+    birthday: Date!
     email: String!
     password: String!
     createDate: Date!
