@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -16,7 +17,12 @@ const mainDefs = readFile('../typeDefs/main.gql')
 const roleDefs = readFile('../typeDefs/role.gql')
 
 const schema = makeExecutableSchema({ typeDefs: [mainDefs, userDefs, roleDefs], resolvers: [mainResolvers, userResolvers, roleResolvers] })
-
+const context = (userId : number | string) => {
+  return ({
+    req: { userId },
+    res: { clearCookie: () => {} }
+  })
+}
 export const createTestConn = async () => createConnection()
 
 export const graphqlTestCall = async (
@@ -28,16 +34,7 @@ export const graphqlTestCall = async (
     schema,
     query,
     undefined,
-    {
-      req: {
-        session: {
-          userId
-        }
-      },
-      res: {
-        clearCookie: () => {}
-      }
-    },
+    context(userId!),
     variables
   )
 }
